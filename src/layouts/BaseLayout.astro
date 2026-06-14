@@ -1,0 +1,98 @@
+---
+// src/layouts/BaseLayout.astro
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'SEMS — Sistemas Empresariales y Modernización',
+  description = 'Consultora IT líder en Guatemala especializada en modernización de sistemas, transformación digital y desarrollo de proyectos tecnológicos para PYMEs.',
+  image = '/og-image.jpg',
+  canonical = Astro.url.href,
+} = Astro.props;
+
+const siteUrl = 'https://sems-gt.cloud';
+---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#020C18" />
+
+  <!-- Primary Meta Tags -->
+  <title>{title}</title>
+  <meta name="title" content={title} />
+  <meta name="description" content={description} />
+  <meta name="keywords" content="transformación digital Guatemala, modernización sistemas, consultoría IT, desarrollo software Guatemala, PYMES tecnología, SEMS Guatemala" />
+  <meta name="author" content="SEMS — Sistemas Empresariales y Modernización" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href={canonical} />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={`${siteUrl}${image}`} />
+  <meta property="og:locale" content="es_GT" />
+  <meta property="og:site_name" content="SEMS" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content={canonical} />
+  <meta property="twitter:title" content={title} />
+  <meta property="twitter:description" content={description} />
+  <meta property="twitter:image" content={`${siteUrl}${image}`} />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <!-- Structured Data — Organization -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "SEMS — Sistemas Empresariales y Modernización",
+      "url": "https://sems-gt.cloud",
+      "logo": "https://sems-gt.cloud/favicon.svg",
+      "description": "Consultora IT especializada en transformación digital y modernización de sistemas para PYMEs en Guatemala.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "GT",
+        "addressRegion": "Guatemala"
+      },
+      "sameAs": []
+    }
+  </script>
+
+</head>
+<body>
+  <slot />
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

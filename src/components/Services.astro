@@ -1,0 +1,233 @@
+---
+// src/components/Services.astro
+
+const services = [
+  {
+    id: 'modernizacion',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>`,
+    title: 'Modernización de Sistemas',
+    description: 'Renovamos tu infraestructura tecnológica legacy hacia soluciones modernas, escalables y eficientes. Migraciones, refactorización y actualización de plataformas.',
+    tags: ['Legacy Migration', 'Cloud', 'API Integration'],
+    accent: '#00D4FF',
+    featured: true,
+  },
+  {
+    id: 'transformacion',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/><path d="M3.05 11a9 9 0 0 1 8.95-8"/></svg>`,
+    title: 'Transformación Digital',
+    description: 'Guiamos a tu empresa en el proceso completo de digitalización: estrategia, implementación y adopción de tecnologías que impulsan el crecimiento.',
+    tags: ['Estrategia Digital', 'Automatización', 'Analytics'],
+    accent: '#7C3AED',
+    featured: true,
+  },
+  {
+    id: 'desarrollo',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`,
+    title: 'Desarrollo de Software',
+    description: 'Desarrollamos aplicaciones web y móviles a medida para tu negocio. Desde MVPs ágiles hasta soluciones empresariales robustas y escalables.',
+    tags: ['Web Apps', 'Mobile', 'E-commerce'],
+    accent: '#00E5A0',
+    featured: false,
+  },
+  {
+    id: 'automatizacion',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>`,
+    title: 'Automatizaciones',
+    description: 'Optimizamos procesos repetitivos mediante automatizaciones inteligentes. Integraciones entre sistemas, flujos de trabajo y bots que ahorran tiempo y recursos.',
+    tags: ['RPA', 'Workflows', 'Integraciones'],
+    accent: '#F59E0B',
+    featured: false,
+  },
+  {
+    id: 'paginas-web',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,
+    title: 'Páginas Web',
+    description: 'Diseñamos y desarrollamos sitios web profesionales, landing pages y tiendas en línea que convierten visitantes en clientes reales para tu negocio.',
+    tags: ['Landing Pages', 'Corporativos', 'E-commerce'],
+    accent: '#EC4899',
+    featured: false,
+  },
+  {
+    id: 'ti-general',
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>`,
+    title: 'TI General & Soporte',
+    description: 'Servicios integrales de tecnología: infraestructura, redes, seguridad informática, soporte técnico y asesoría TI para empresas guatemaltecas.',
+    tags: ['Infraestructura', 'Seguridad', 'Soporte'],
+    accent: '#00D4FF',
+    featured: false,
+  },
+];
+---
+
+<section id="servicios" class="section" aria-labelledby="servicios-title">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-eyebrow">Lo que hacemos</span>
+      <h2 class="section-title" id="servicios-title">
+        Nuestros <span class="accent">Servicios</span>
+      </h2>
+      <div class="divider"></div>
+      <p class="section-subtitle">
+        Soluciones tecnológicas completas para llevar tu empresa al siguiente nivel.
+        Nos especializamos en lo que realmente transforma los negocios guatemaltecos.
+      </p>
+    </div>
+
+    <div class="services-grid">
+      {services.map((service, i) => (
+        <article
+          class={`service-card card reveal delay-${(i % 3) + 1} ${service.featured ? 'featured' : ''}`}
+          id={`service-${service.id}`}
+          aria-label={service.title}
+          style={`--card-accent: ${service.accent};`}
+        >
+          <div class="service-icon" aria-hidden="true" set:html={service.icon} />
+
+          <h3 class="service-title">{service.title}</h3>
+
+          <p class="service-desc">{service.description}</p>
+
+          <div class="service-tags" aria-label="Áreas de servicio">
+            {service.tags.map(tag => (
+              <span class="service-tag">{tag}</span>
+            ))}
+          </div>
+
+          <a href="#contacto" class="service-link" aria-label={`Más información sobre ${service.title}`}>
+            Más información
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+
+          {service.featured && (
+            <div class="featured-badge">⭐ Principal</div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    position: relative;
+  }
+
+  .service-card.featured {
+    border-color: rgba(0, 212, 255, 0.3);
+  }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(135deg, transparent 0%, rgba(var(--card-accent-rgb, 0,212,255), 0.04) 100%);
+    pointer-events: none;
+  }
+
+  /* Icon */
+  .service-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-md);
+    background: rgba(0,212,255,0.08);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--card-accent);
+    transition: all var(--transition-base);
+    flex-shrink: 0;
+  }
+
+  .service-card:hover .service-icon {
+    background: rgba(0,212,255,0.15);
+    border-color: var(--card-accent);
+    box-shadow: 0 0 20px rgba(0,212,255,0.2);
+  }
+
+  .service-title {
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--color-text-primary);
+  }
+
+  .service-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  /* Tags */
+  .service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .service-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    background: rgba(0,212,255,0.06);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    color: var(--color-text-muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* Link */
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--card-accent);
+    transition: gap var(--transition-fast), opacity var(--transition-fast);
+    margin-top: auto;
+  }
+
+  .service-link:hover {
+    gap: var(--space-3);
+    opacity: 1;
+  }
+
+  /* Featured badge */
+  .featured-badge {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-4);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    background: linear-gradient(135deg, rgba(0,212,255,0.2), rgba(124,58,237,0.2));
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: var(--radius-full);
+    color: var(--color-accent-cyan);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 640px) {
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
